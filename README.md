@@ -30,11 +30,11 @@ dependencies {
 	        android:layout_centerInParent="true"
 	/>
 	```
-2. Reference **IngrainAdView** in your player's activity.
+2. Reference **IngrainAdView** in your player's activity __(in OnCreate())__.
         
         ingrainView = (IngrainAdView) findViewById(R.id.ingrainView);
 
-3. For initializing the SDK, call **setUp()**
+3. For initializing the SDK, call **setUp()** __(in OnCreate())__
 
     a. For fetching ads from Ingrain server
 
@@ -58,11 +58,11 @@ dependencies {
 
     b. IngrainAdView.DFP_SERVER     // for ads from DFP server  
 
-6. If your player provides **Ready** state after seek/buffering occurs For Example: _ExoPlayer_, pass **true** in 
+6. If your player provides **Ready** state after seek/buffering occurs For Example: _ExoPlayer_, pass **true** __(in OnCreate())__ 
 	```
 	                   ingrainView.isReadyStateAvailable(true);
 	```       
-7. Implement **IngrainViewControls** and override its callbacks as shown below. Note that implementing this interface and overriding its methods as shown below is **CRUCIAL** for the workings of the SDK
+7. Implement **IngrainViewControls** and override its callbacks as shown below. Note that implementing this interface and overriding its methods as shown below is **CRUCIAL** for the workings of the SDK __(in OnCreate())__
 
 	```                  
 	                    ingrainView.setIngrainViewControlListener(this);
@@ -98,18 +98,18 @@ dependencies {
 	                    }
 	
 	```
-8. Create **IngrainPlayerController** object. It will provide _Play, Pause, Forward, Rewind & Seek_ controls.
+8. Create **IngrainPlayerController** object. It will provide _Play, Pause, Forward, Rewind & Seek_ controls __(in OnCreate())__ .
 	
 	```
 	        mediaController = new IngrainPlayerController(this);
 	```
-9. If you want to provide your own custom layout for IngrainPlayerController, you must call this method after creating the IngrainPlayerControllerObject.
+9. If you want to provide your own custom layout for IngrainPlayerController, you must call this method after creating the IngrainPlayerControllerObject __(in OnCreate())__ .
 	
 	```
 	        mediaController.setCustomControllerLayout(R.layout.mycustomui);
 	        
 	```
-10. Implement the MediaPlayerControl interface and pass its instance to IngrainPlayerController as shown below.
+10. Implement the MediaPlayerControl interface and pass its instance to IngrainPlayerController as shown below __(in OnCreate())__ .
 	
 	```
 	        mMediaPlayerControl = new IngrainPlayerController.MediaPlayerControl() {
@@ -205,7 +205,14 @@ dependencies {
 	        });
 	```
 
-9. Call **isAdClicked()** inside the method where your app delivers the _touchEvents_.
+11. Inside **onPrepared()** for MediaPlayer and **ExoPlayer.STATE_READY** of ExoPlayer, call
+        
+        
+         	   ingrainView.onMediaPlayerPrepared();
+        
+        
+12. Call **isAdClicked()** inside the method where your app delivers the _touchEvents_.
+
 	```
 	   @Override
 	    public boolean onTouchEvent(MotionEvent event) {
