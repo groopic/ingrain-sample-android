@@ -20,7 +20,7 @@ dependencies {
 
 * Head over to your player’s Activity class & include the following methods for using the SDK.
 
-1. Include **IngrainAdView** on top of the surfaceView (or anyother view that is being used rendering video) in your layout's xml file
+1. Include **IngrainAdView** on top of the surfaceView (or any other view that is being used for rendering video) in your layout's xml file
 
 	```
 	<io.ingrain.sdk.IngrainAdView
