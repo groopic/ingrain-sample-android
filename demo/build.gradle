@@ -27,5 +27,5 @@ android {
 dependencies {
     compile 'com.github.nkzawa:socket.io-client:0.4.2'
     compile files('libs/exoplayerlib.jar')
-    compile 'io.ingrain.sdk:ingrain-io:0.1.0'
+    compile 'io.ingrain.sdk:ingrain-io:0.0.2'
 }

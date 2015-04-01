@@ -48,7 +48,7 @@ public class MediaPlayerDemo extends Activity implements SurfaceHolder.Callback,
         mContext = this;
 
         videoURL = "https://s3-us-west-2.amazonaws.com/ingrain/capitaltalk.geo/CapitalTalk20150105.mp4";
-        vidID = "37";
+        vidID = "geonews.capitaltalk.20150501";
         adFrom="DFP";
         readFrom = "INTERNET";
 
@@ -64,9 +64,9 @@ public class MediaPlayerDemo extends Activity implements SurfaceHolder.Callback,
         /** IngrainAdView **/
         ingrainView = (IngrainAdView) findViewById(R.id.ingrainView);
         ingrainView.setIngrainViewControlListener(this);
-        ingrainView.setUp(vidID, "ingrainSDKKey", IngrainAdView.INTERNET_DATA, IngrainAdView.DFP_SERVER);
+        ingrainView.setUp(vidID, "apiKey");
 
-        String objectTag = "http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/7708063/ingrain_object&ciu_szs&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=www.groopic.com&description_url=www.groopic.com"/*+ String.valueOf(Calendar.getInstance().getTimeInMillis())*/;
+        String objectTag = "http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/7708063/ingrain_object&ciu_szs&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=www.groopic.com&description_url=www.groopic.com";
         ingrainView.setObjectsTag(objectTag);
         ingrainView.setCustomTargetingParams(new HashMap<String, Object>());
 
