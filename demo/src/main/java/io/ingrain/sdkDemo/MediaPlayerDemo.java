@@ -15,6 +15,7 @@ import com.google.android.exoplayer.demo.IngrainSurfaceView;
 import com.google.android.exoplayer.demo.R;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import io.ingrain.sdk.IngrainAdView;
 import io.ingrain.sdk.views.IngrainPlayerController;
@@ -64,6 +65,11 @@ public class MediaPlayerDemo extends Activity implements SurfaceHolder.Callback,
         ingrainView = (IngrainAdView) findViewById(R.id.ingrainView);
         ingrainView.setIngrainViewControlListener(this);
         ingrainView.setUp(vidID, "ingrainSDKKey", IngrainAdView.INTERNET_DATA, IngrainAdView.DFP_SERVER);
+
+        String objectTag = "http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/7708063/ingrain_object&ciu_szs&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=www.groopic.com&description_url=www.groopic.com"/*+ String.valueOf(Calendar.getInstance().getTimeInMillis())*/;
+        ingrainView.setObjectsTag(objectTag);
+        ingrainView.setCustomTargetingParams(new HashMap<String, Object>());
+
 
         /** IngrainPlayerController **/
         mediaController = new IngrainPlayerController(this);
