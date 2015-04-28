@@ -47,6 +47,7 @@ import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import io.ingrain.sdk.IngrainAdView;
@@ -100,21 +101,23 @@ public class ExoPlayerDemo extends Activity implements SurfaceHolder.Callback, O
 
         Intent intent = getIntent();
         contentUri = intent.getData();
-        contentUri =  Uri.parse(/*"https://s3-us-west-2.amazonaws.com/ingrain/movie.3gp"*/"https://s3-us-west-2.amazonaws.com/ingrain/capitaltalk.geo/CapitalTalk20150105.mp4");
+        contentUri =  Uri.parse("https://s3-us-west-2.amazonaws.com/geo.ingrain/GeoNews_39271_Khabarnaak_201516042300.mp4");
         contentType = intent.getIntExtra(CONTENT_TYPE_EXTRA, DemoUtil.TYPE_OTHER);
         contentId = intent.getStringExtra(CONTENT_ID_EXTRA);
 
         setContentView(R.layout.exo_player_activity);
         View root = findViewById(R.id.root);
         root.setOnTouchListener(new OnTouchListener() {
+
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    toggleControlsVisibility();
-                } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    view.performClick();
+                    if(ingrainView.isAdClicked(motionEvent)) {
+                        mediaController.hide();
+                        return true;
+                    }
                 }
-                return true;
+                return false;
             }
         });
 
@@ -124,8 +127,24 @@ public class ExoPlayerDemo extends Activity implements SurfaceHolder.Callback, O
         /** IngrainAdView **/
         ingrainView = (IngrainAdView) findViewById(R.id.ingrainView);
         ingrainView.setIngrainViewControlListener(this);
-        ingrainView.setUp("37", "ingrainSDKKey", IngrainAdView.INTERNET_DATA, IngrainAdView.DFP_SERVER);
+        ingrainView.setUp("39271", "9c5de27yj9b2nxfy8i1ong3d80cbkao3qbgzmej7", IngrainAdView.INTERNET_DATA, IngrainAdView.DFP_SERVER);
+//        ingrainView.setUp("geonews.capitaltalk.20150409", "9c5de27yj9b2nxfy8i1ong3d80cbkao3qbgzmej7", false);
 
+        /**
+         * pass your objects/Posters/Tickers tag in the method provided {@link ImaPlayer#setObjectTag(String tag)}, {@link ImaPlayer#setPosterTag(String tag)}, {@link ImaPlayer#setTickerTag(String tag)} respectively in ImaPlayer
+         */
+        String objectTag = "http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/7708063/ingrain_object&ciu_szs&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=www.groopic.com&description_url=www.groopic.com";
+        ingrainView.setObjectsTag(objectTag);
+        String tickerTag = "http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/7708063/ingrain_ticker_2&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1";
+        ingrainView.setTickersTag(tickerTag);
+        String posterTag = "http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/7708063/ingrain_poster&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]";
+        ingrainView.setPostersTag(posterTag);
+        /**
+         * For custom targeting, pass your params as shown below.
+         */
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        params.put("age", 14);
+        ingrainView.setCustomTargetingParams(params);
         /** ExoPlayer provides Ready state after seek/buffering completes, hence we passed true in this method **/
         ingrainView.isReadyStateAvailable(true);
 
@@ -140,7 +159,7 @@ public class ExoPlayerDemo extends Activity implements SurfaceHolder.Callback, O
         mediaController = new IngrainPlayerController(this);
         //mediaController.setCustomControllerLayout(R.layout.custom_media_controller_file); // uncomment if a custom designed MediaController is to be used
 
-        mediaController.setAnchorView((ViewGroup)root);
+        mediaController.setAnchorView((ViewGroup)findViewById(R.id.anchorViewForControls));
         mediaController.setSeekEventListener(this);
         IngrainPlayerController.MediaPlayerControl controls = new IngrainPlayerController.MediaPlayerControl() {
             @Override
@@ -608,12 +627,5 @@ public class ExoPlayerDemo extends Activity implements SurfaceHolder.Callback, O
     @Override
     public void onSeekEnd() {
         ingrainView.playerEventOccured(IngrainAdView.SEEK_END);
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        /** Pass touch events to the SDK from here (or anyother method that recieves the touchEvents) for ad clicking **/
-        ingrainView.isAdClicked(event);
-        return super.onTouchEvent(event);
     }
 }

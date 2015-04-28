@@ -26,6 +26,7 @@ android {
 
 dependencies {
     compile 'com.github.nkzawa:socket.io-client:0.4.2'
+    compile 'com.android.support:cardview-v7:21.+'
     compile files('libs/exoplayerlib.jar')
     compile 'io.ingrain.sdk:ingrain-io:0.1.0'
 }

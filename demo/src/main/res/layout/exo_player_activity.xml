@@ -26,6 +26,13 @@
       android:layout_marginBottom="32dp"
       android:visibility="invisible"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/anchorViewForControls"
+        android:gravity="bottom"/>
+
   <View android:id="@+id/shutter"
       android:layout_width="match_parent"
       android:layout_height="match_parent"

@@ -21,6 +21,12 @@
 		android:layout_height="match_parent"
         android:layout_centerInParent="true"
 />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/anchorViewForControls"
+        android:gravity="bottom"/>
 
 
 </FrameLayout>
