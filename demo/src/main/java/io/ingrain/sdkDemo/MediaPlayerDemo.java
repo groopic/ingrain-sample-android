@@ -111,9 +111,9 @@ public class MediaPlayerDemo extends Activity implements SurfaceHolder.Callback,
         /** IngrainPlayerController **/
         mediaController = new IngrainPlayerController(this);
         //mediaController.setCustomControllerLayout(R.layout.custom_media_controller_file); // uncomment if a custom designed MediaController is to be used
-        overrideIngrainPlayerControllerMethods(); 
+        overrideIngrainPlayerControllerMethods();
         mediaController.setMediaPlayer(mMediaPlayerControl);
-        
+
         // rootView is the top most/root view in layout's heirarchy of the playerActivity xml file
         mediaController.setAnchorView((ViewGroup) findViewById(R.id.anchorViewForControls));
         mediaController.setEnabled(true);

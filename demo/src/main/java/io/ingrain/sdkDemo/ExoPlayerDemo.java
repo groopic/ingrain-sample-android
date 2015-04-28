@@ -127,6 +127,7 @@ public class ExoPlayerDemo extends Activity implements SurfaceHolder.Callback, O
         /** IngrainAdView **/
         ingrainView = (IngrainAdView) findViewById(R.id.ingrainView);
         ingrainView.setIngrainViewControlListener(this);
+
         ingrainView.setUp("39271", "9c5de27yj9b2nxfy8i1ong3d80cbkao3qbgzmej7", IngrainAdView.INTERNET_DATA, IngrainAdView.DFP_SERVER);
 //        ingrainView.setUp("geonews.capitaltalk.20150409", "9c5de27yj9b2nxfy8i1ong3d80cbkao3qbgzmej7", false);
 
@@ -145,6 +146,7 @@ public class ExoPlayerDemo extends Activity implements SurfaceHolder.Callback, O
         HashMap<String, Object> params = new HashMap<String, Object>();
         params.put("age", 14);
         ingrainView.setCustomTargetingParams(params);
+
         /** ExoPlayer provides Ready state after seek/buffering completes, hence we passed true in this method **/
         ingrainView.isReadyStateAvailable(true);
 

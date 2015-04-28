@@ -220,3 +220,8 @@ dependencies {
 	        return super.onTouchEvent(event);
 	    }
 	```
+13. Inside **surfaceChanged()** call
+
+       ```
+           ingrainView.surfaceViewSizeChanged(width, height);
+       ```
