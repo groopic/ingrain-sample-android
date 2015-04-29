@@ -38,15 +38,11 @@ dependencies {
 
     a. For fetching ads from Ingrain server
 
-         ingrainView.setUp(videoID, "ingrainSDKKey")
-
-    b. For specifying which server to use for fetching ads 
-
-        ingrainView.setUp(videoID, "ingrainSDKKey", IngrainAdView.DFP_SERVER)
-
-    c. For specifying the server and fetching location i-e; internet
-
-        ingrainView.setUp(videoID, "ingrainSDKKey", IngrainAdView.INTERNET_DATA, IngrainAdView.DFP_SERVER);
+         ingrainView.setUp(videoID, "ingrainSDKKey", false)
+         
+        i.   First Argument is the videoID
+        ii.  Second argument is the IngrainSDKKey
+        iii. Third argument is the boolean for enabling and disabling debugging. For enabling debugging, pass "true". For Disabling debugging pass "false"
 
 4. **Fetch Locations**:
 
